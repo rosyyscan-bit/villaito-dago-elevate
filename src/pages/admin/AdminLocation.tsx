@@ -32,7 +32,7 @@ const AdminLocation = () => {
 
   return (
     <div className="max-w-xl space-y-6">
-      <div className="flat-card rounded-sm p-6">
+      <div className="glass-card rounded-sm p-6">
         <h3 className="font-display text-lg font-semibold text-foreground mb-4">Location Settings</h3>
         <div className="space-y-3">
           <Input placeholder="Address" value={address} onChange={(e) => setAddress(e.target.value)} className="bg-secondary/50" />

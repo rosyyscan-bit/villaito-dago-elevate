@@ -52,7 +52,7 @@ const TestimonialsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flat-card mt-16 rounded-sm p-8 md:p-12"
+          className="glass-card mt-16 rounded-sm p-8 md:p-12"
         >
           <div className="flex justify-center gap-1 mb-4">
             {[...Array(5)].map((_, i) => (

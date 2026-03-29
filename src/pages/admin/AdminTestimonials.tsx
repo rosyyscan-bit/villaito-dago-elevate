@@ -34,7 +34,7 @@ const AdminTestimonials = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flat-card rounded-sm p-6">
+      <div className="glass-card rounded-sm p-6">
         <h3 className="font-display text-lg font-semibold text-foreground mb-4">{editing ? "Edit" : "Add"} Testimonial</h3>
         <div className="space-y-3">
           <Input placeholder="Guest name" value={name} onChange={(e) => setName(e.target.value)} className="bg-secondary/50" />
@@ -45,7 +45,7 @@ const AdminTestimonials = () => {
       </div>
       <div className="space-y-2">
         {items.map((item) => (
-          <div key={item.id} className="flat-card flex items-center gap-4 rounded-sm p-4">
+          <div key={item.id} className="glass-card flex items-center gap-4 rounded-sm p-4">
             <div className="flex-1">
               <p className="font-medium text-foreground">{item.name}</p>
               <p className="text-xs text-muted-foreground line-clamp-1">{item.title}</p>

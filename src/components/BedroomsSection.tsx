@@ -81,7 +81,7 @@ const BedroomsSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`flat-card overflow-hidden rounded-sm transition-all ${
+                className={`glass-card overflow-hidden rounded-sm transition-all ${
                   i === 1 ? "md:scale-105 md:shadow-2xl" : "md:opacity-80"
                 }`}
               >

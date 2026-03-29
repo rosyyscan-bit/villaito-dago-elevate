@@ -44,14 +44,14 @@ const AdminHomepage = () => {
 
   return (
     <div className="max-w-xl space-y-6">
-      <div className="flat-card rounded-sm p-6">
+      <div className="glass-card rounded-sm p-6">
         <h3 className="font-display text-lg font-semibold text-foreground mb-4">Hero Section</h3>
         <div className="space-y-3">
           <Input placeholder="Title" value={heroTitle} onChange={(e) => setHeroTitle(e.target.value)} className="bg-secondary/50" />
           <Input placeholder="Subtitle" value={heroSubtitle} onChange={(e) => setHeroSubtitle(e.target.value)} className="bg-secondary/50" />
         </div>
       </div>
-      <div className="flat-card rounded-sm p-6">
+      <div className="glass-card rounded-sm p-6">
         <h3 className="font-display text-lg font-semibold text-foreground mb-4">About Section</h3>
         <div className="space-y-3">
           <Input placeholder="Title" value={aboutTitle} onChange={(e) => setAboutTitle(e.target.value)} className="bg-secondary/50" />

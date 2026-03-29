@@ -28,7 +28,7 @@ const AdminGallery = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flat-card rounded-sm p-6">
+      <div className="glass-card rounded-sm p-6">
         <h3 className="font-display text-lg font-semibold text-foreground mb-4">Add Media</h3>
         <div className="space-y-3">
           <Input placeholder="Image/Video URL" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} className="bg-secondary/50" />
@@ -42,7 +42,7 @@ const AdminGallery = () => {
       </div>
       <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
         {items.map((item) => (
-          <div key={item.id} className="flat-card group relative overflow-hidden rounded-sm">
+          <div key={item.id} className="glass-card group relative overflow-hidden rounded-sm">
             {item.media_type === "video" ? (
               <video src={item.image_url} className="h-32 w-full object-cover" />
             ) : (
