@@ -1,4 +1,3 @@
-import { MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 const WhatsAppButton = () => {
@@ -7,13 +6,13 @@ const WhatsAppButton = () => {
       href="https://wa.link/vt5ig5"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-transform hover:scale-110"
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ delay: 2, type: "spring" }}
-      aria-label="Chat on WhatsApp"
+      className="fixed bottom-6 right-6 z-40 border border-primary/40 bg-background/90 px-5 py-2.5 text-xs font-medium tracking-widest text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 2, duration: 0.5 }}
+      aria-label="Book Now on WhatsApp"
     >
-      <MessageCircle className="h-6 w-6" fill="white" stroke="white" />
+      BOOK NOW
     </motion.a>
   );
 };

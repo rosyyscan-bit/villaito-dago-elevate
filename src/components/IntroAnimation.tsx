@@ -10,9 +10,9 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
   const [phase, setPhase] = useState<"logo" | "text" | "done">("logo");
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase("text"), 2000);
-    const t2 = setTimeout(() => setPhase("done"), 4500);
-    const t3 = setTimeout(onComplete, 5000);
+    const t1 = setTimeout(() => setPhase("text"), 1800);
+    const t2 = setTimeout(() => setPhase("done"), 4200);
+    const t3 = setTimeout(onComplete, 4600);
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, [onComplete]);
 
@@ -20,40 +20,40 @@ const IntroAnimation = ({ onComplete }: IntroAnimationProps) => {
     <AnimatePresence>
       {phase !== "done" && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-background"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#080f0c]"
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
         >
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-5">
             <motion.img
               src={logo}
               alt="Villaito Logo"
-              className="h-20 w-20"
-              initial={{ opacity: 0, scale: 0.5 }}
+              className="h-16 w-16"
+              initial={{ opacity: 0, scale: 0.6 }}
               animate={{
                 opacity: 1,
                 scale: 1,
                 rotate: phase === "text" ? 360 : 0,
-                x: phase === "text" ? -20 : 0,
+                x: phase === "text" ? -16 : 0,
               }}
-              transition={{ duration: 1, ease: "easeOut" }}
+              transition={{ duration: 0.9, ease: "easeOut" }}
             />
             {phase === "text" && (
               <div className="flex flex-col">
                 <motion.span
-                  className="font-display text-4xl font-bold gold-gradient-text"
+                  className="font-display text-3xl font-semibold text-foreground"
                   initial={{ opacity: 0, width: 0 }}
                   animate={{ opacity: 1, width: "auto" }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
+                  transition={{ duration: 0.7, delay: 0.15 }}
                   style={{ overflow: "hidden", whiteSpace: "nowrap" }}
                 >
                   Villaito
                 </motion.span>
                 <motion.span
-                  className="font-display text-2xl tracking-[0.3em] text-foreground"
+                  className="font-display text-lg tracking-[0.35em] text-primary"
                   initial={{ opacity: 0, width: 0 }}
                   animate={{ opacity: 1, width: "auto" }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
+                  transition={{ duration: 0.7, delay: 0.5 }}
                   style={{ overflow: "hidden", whiteSpace: "nowrap" }}
                 >
                   DAGO
