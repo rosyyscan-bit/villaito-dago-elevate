@@ -10,7 +10,7 @@ import {
   Flame, Coffee, GlassWater, Microwave, Refrigerator, CupSoda,
   CookingPot, UtensilsCrossed, Utensils,
   Baby, BedDouble, Sofa,
-  Car, Shield, Users, Sparkles, User, Iron,
+  Car, Shield, Users, Sparkles, User, Shirt as IronIcon,
   WashingMachine, Wifi, Armchair
 } from "lucide-react";
 
