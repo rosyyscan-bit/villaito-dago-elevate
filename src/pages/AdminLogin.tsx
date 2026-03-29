@@ -50,10 +50,10 @@ const AdminLogin = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="glass-card mx-4 w-full max-w-md rounded-sm p-8">
+      <div className="flat-card mx-4 w-full max-w-md rounded-sm p-8">
         <div className="mb-8 flex flex-col items-center">
           <img src={logo} alt="Villaito" className="mb-4 h-16 w-16" />
-          <h1 className="font-display text-2xl font-bold gold-gradient-text">Admin Panel</h1>
+          <h1 className="font-display text-2xl font-bold gold-accent">Admin Panel</h1>
           <p className="mt-2 text-sm text-muted-foreground">Villaito Dago Management</p>
         </div>
 

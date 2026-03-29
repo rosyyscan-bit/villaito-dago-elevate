@@ -66,7 +66,7 @@ const AdminAccount = () => {
 
   return (
     <div className="max-w-xl space-y-8">
-      <div className="glass-card rounded-sm p-6">
+      <div className="flat-card rounded-sm p-6">
         <h2 className="font-display text-lg font-semibold text-foreground mb-4">Change Password</h2>
         <form onSubmit={handlePasswordChange} className="space-y-4">
           <div>
@@ -87,7 +87,7 @@ const AdminAccount = () => {
         </form>
       </div>
 
-      <div className="glass-card rounded-sm p-6">
+      <div className="flat-card rounded-sm p-6">
         <h2 className="font-display text-lg font-semibold text-foreground mb-4">Update Email</h2>
         <form onSubmit={handleEmailChange} className="space-y-4">
           <div>

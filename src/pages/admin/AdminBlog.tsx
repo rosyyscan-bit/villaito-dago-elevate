@@ -74,7 +74,7 @@ const AdminBlog = () => {
 
   return (
     <div className="space-y-6">
-      <div className="glass-card rounded-sm p-6">
+      <div className="flat-card rounded-sm p-6">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-display text-lg font-semibold text-foreground">
             {editing ? "Edit Post" : "New Post"}
@@ -119,7 +119,7 @@ const AdminBlog = () => {
 
       <div className="space-y-3">
         {items.map((item) => (
-          <div key={item.id} className="glass-card flex items-center gap-4 rounded-sm p-4">
+          <div key={item.id} className="flat-card flex items-center gap-4 rounded-sm p-4">
             <div className="flex-1">
               <p className="font-medium text-foreground">{item.title}</p>
               <p className="text-xs text-muted-foreground">{item.published ? "Published" : "Draft"} · {new Date(item.created_at).toLocaleDateString()}</p>

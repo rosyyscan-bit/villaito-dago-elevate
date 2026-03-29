@@ -69,7 +69,7 @@ const RatesSection = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`glass-card rounded-sm p-8 text-left transition-all hover:-translate-y-1 ${
+              className={`flat-card rounded-sm p-8 text-left transition-all hover:-translate-y-1 ${
                 rate.featured ? "border-primary/40 ring-1 ring-primary/20" : ""
               }`}
             >
@@ -81,7 +81,7 @@ const RatesSection = () => {
               <h3 className="font-display text-xl font-semibold text-foreground">{rate.title}</h3>
               <p className="text-sm text-muted-foreground">{rate.subtitle}</p>
               <div className="mt-4">
-                <span className="font-display text-3xl font-bold gold-gradient-text">{rate.price}</span>
+                <span className="font-display text-3xl font-bold gold-accent">{rate.price}</span>
                 <span className="text-sm text-muted-foreground"> {rate.per}</span>
               </div>
               <ul className="mt-6 space-y-3">
