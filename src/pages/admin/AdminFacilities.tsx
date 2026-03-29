@@ -32,7 +32,7 @@ const AdminFacilities = () => {
 
   return (
     <div className="space-y-6">
-      <div className="glass-card rounded-sm p-6">
+      <div className="flat-card rounded-sm p-6">
         <h3 className="font-display text-lg font-semibold text-foreground mb-4">
           {editing ? "Edit Facility" : "Add Facility"}
         </h3>
@@ -44,7 +44,7 @@ const AdminFacilities = () => {
       </div>
       <div className="space-y-2">
         {items.map((item) => (
-          <div key={item.id} className="glass-card flex items-center gap-4 rounded-sm p-4">
+          <div key={item.id} className="flat-card flex items-center gap-4 rounded-sm p-4">
             <span className="flex-1 text-foreground">{item.title}</span>
             <span className="text-xs text-muted-foreground">{item.icon}</span>
             <Button variant="ghost" size="sm" onClick={() => { setEditing(item); setTitle(item.title); setIcon(item.icon); }} className="text-primary">Edit</Button>

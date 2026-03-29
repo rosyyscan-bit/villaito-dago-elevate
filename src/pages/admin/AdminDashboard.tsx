@@ -39,7 +39,7 @@ const AdminDashboard = () => {
       <h1 className="font-display text-2xl font-bold text-foreground mb-6">Welcome Back</h1>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((card) => (
-          <div key={card.label} className="glass-card rounded-sm p-6">
+          <div key={card.label} className="flat-card rounded-sm p-6">
             <p className="text-sm text-muted-foreground">{card.label}</p>
             <p className="mt-2 font-display text-3xl font-bold text-primary">{card.count}</p>
           </div>

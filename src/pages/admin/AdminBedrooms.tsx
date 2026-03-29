@@ -60,7 +60,7 @@ const AdminBedrooms = () => {
 
   return (
     <div className="space-y-6">
-      <div className="glass-card rounded-sm p-6">
+      <div className="flat-card rounded-sm p-6">
         <h3 className="font-display text-lg font-semibold text-foreground mb-4">
           {editing ? "Edit Bedroom" : "Add Bedroom"}
         </h3>
@@ -83,7 +83,7 @@ const AdminBedrooms = () => {
 
       <div className="space-y-3">
         {items.map((item) => (
-          <div key={item.id} className="glass-card flex items-center gap-4 rounded-sm p-4">
+          <div key={item.id} className="flat-card flex items-center gap-4 rounded-sm p-4">
             <GripVertical size={16} className="text-muted-foreground" />
             {item.image_url && <img src={item.image_url} alt={item.name} className="h-12 w-16 rounded-sm object-cover" />}
             <div className="flex-1">
