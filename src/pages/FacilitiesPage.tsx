@@ -77,7 +77,7 @@ const categories = [
       { icon: Users, name: "Helper & Driver Area" },
       { icon: Sparkles, name: "Daily Cleaning Service for Public Area" },
       { icon: User, name: "Live-In Villa Keeper" },
-      { icon: Iron, name: "Iron" },
+      { icon: IronIcon, name: "Iron" },
       { icon: WashingMachine, name: "Washer & Dryer" },
       { icon: Wifi, name: "Free WiFi Throughout Villa" },
       { icon: Armchair, name: "Rooftop with Seating Area" },
