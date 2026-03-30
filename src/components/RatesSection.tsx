@@ -1,23 +1,14 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { useRealtimeTable } from "@/hooks/use-realtime-table";
+import { useRealtimeSetting } from "@/hooks/use-realtime-table";
 
-const rates = [
-  {
-    title: "Weekdays",
-    subtitle: "Sunday – Thursday",
-    price: "Rp 7.000.000",
-    per: "/ night",
-  },
-  {
-    title: "Weekends & Public Holidays",
-    subtitle: "Friday – Saturday & Holidays",
-    price: "Rp 8.000.000",
-    per: "/ night",
-    featured: true,
-  },
+const fallbackRates = [
+  { title: "Weekdays", subtitle: "Sunday – Thursday", price: "Rp 7.000.000", per: "/ night" },
+  { title: "Weekends & Public Holidays", subtitle: "Friday – Saturday & Holidays", price: "Rp 8.000.000", per: "/ night", featured: true },
 ];
 
-const notes = [
+const defaultNotes = [
   "Extra futon bed fee: Rp150.000 per bed per night",
   "Special periods (Christmas, Lebaran) may have different rates",
   "Airbnb price may be higher due to tax & fees",
@@ -28,6 +19,9 @@ const notes = [
 const RatesSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  const { data: dbRates } = useRealtimeTable("rates");
+  const rates = dbRates.length > 0 ? dbRates : fallbackRates;
 
   return (
     <section id="rates" className="section-padding" ref={ref}>
@@ -51,9 +45,9 @@ const RatesSection = () => {
         <div className="gold-line mx-auto mt-6" />
 
         <div className="mt-16 grid gap-6 md:grid-cols-2">
-          {rates.map((rate, i) => (
+          {rates.map((rate: any, i: number) => (
             <motion.div
-              key={rate.title}
+              key={rate.id || rate.title}
               initial={{ opacity: 0, y: 24 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
@@ -87,7 +81,7 @@ const RatesSection = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-12 space-y-2 text-left"
         >
-          {notes.map((note) => (
+          {defaultNotes.map((note) => (
             <p key={note} className="flex items-start gap-2 text-xs text-muted-foreground">
               <span className="mt-1.5 h-1 w-1 rounded-full bg-muted-foreground/50 flex-shrink-0" />
               {note}

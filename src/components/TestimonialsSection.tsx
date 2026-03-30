@@ -1,33 +1,12 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { useRealtimeTable } from "@/hooks/use-realtime-table";
 
-const testimonials = [
-  {
-    name: "Anti",
-    title: "Selalu Pengen Balik Lagi ke Sini",
-    text: "Udah beberapa kali nginep disini dan selaluuu suka. Villanya nyaman, cocok untuk kumpul2 keluarga besar, temen2 juga bisa. Kamarnya bersih, handuknya wangi, kasurnya nyaman. Jadi ga heran selalu pengen balik lagi kesini ❤️",
-  },
-  {
-    name: "Mirna",
-    title: "You Definitely Will Not Be Disappointed",
-    text: "We were a group of 17 and the villa easily accommodated all of us. 7 spacious bedrooms with ensuite bathrooms. The pool was awesome. I would strongly recommend anyone going in big groups to stay here.",
-  },
-  {
-    name: "Rahma",
-    title: "Semua Fasilitasnya Kayak Hotel Bintang 5",
-    text: "Udah beberapa kali stay di villaito, dari acara keluarga sampai acara kantor. Rekomen bgt buat stay rame-rame, semua fasilitasnya kayak hotel bintang 5.",
-  },
-  {
-    name: "William",
-    title: "Will Definitely Book Again",
-    text: "Love our stay at Villaito Dago. The villa is clean, has beautiful view, has a lot of facilities. Walking in the morning around villa complex is also very refreshing. Will definitely book again.",
-  },
-  {
-    name: "Christina",
-    title: "Everyone Were Very Happy",
-    text: "We stayed in the property for company outing and everyone were very happy. The villa looks exactly the same with the photos, clean and well maintained. It feels like staying in 5 star hotels.",
-  },
+const fallbackTestimonials = [
+  { name: "Anti", title: "Selalu Pengen Balik Lagi ke Sini", text: "Udah beberapa kali nginep disini dan selaluuu suka. Villanya nyaman, cocok untuk kumpul2 keluarga besar." },
+  { name: "Mirna", title: "You Definitely Will Not Be Disappointed", text: "We were a group of 17 and the villa easily accommodated all of us. 7 spacious bedrooms with ensuite bathrooms." },
+  { name: "Rahma", title: "Semua Fasilitasnya Kayak Hotel Bintang 5", text: "Rekomen bgt buat stay rame-rame, semua fasilitasnya kayak hotel bintang 5." },
 ];
 
 const TestimonialsSection = () => {
@@ -35,10 +14,14 @@ const TestimonialsSection = () => {
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [current, setCurrent] = useState(0);
 
+  const { data: dbTestimonials } = useRealtimeTable("testimonials");
+  const testimonials = dbTestimonials.length > 0 ? dbTestimonials : fallbackTestimonials;
+
   const next = () => setCurrent((c) => (c + 1) % testimonials.length);
   const prev = () => setCurrent((c) => (c - 1 + testimonials.length) % testimonials.length);
 
-  const t = testimonials[current];
+  const t = testimonials[current] as any;
+  if (!t) return null;
 
   return (
     <section className="section-padding" ref={ref}>

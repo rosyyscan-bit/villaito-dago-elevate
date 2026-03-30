@@ -1,6 +1,7 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState } from "react";
 import { X } from "lucide-react";
+import { useRealtimeTable } from "@/hooks/use-realtime-table";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
 import gallery3 from "@/assets/gallery-3.jpg";
@@ -9,12 +10,17 @@ import bed1 from "@/assets/bedroom-1.jpg";
 import bed2 from "@/assets/bedroom-2.jpg";
 import heroImg from "@/assets/villa-hero.png";
 
-const images = [heroImg, gallery1, gallery2, gallery3, gallery4, bed1, bed2];
+const fallbackImages = [heroImg, gallery1, gallery2, gallery3, gallery4, bed1, bed2];
 
 const GallerySection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const [lightbox, setLightbox] = useState<number | null>(null);
+
+  const { data: dbGallery } = useRealtimeTable("gallery");
+  const images = dbGallery.length > 0
+    ? dbGallery.map((g: any) => g.image_url)
+    : fallbackImages;
 
   return (
     <section id="gallery" className="section-padding" ref={ref}>
@@ -26,7 +32,7 @@ const GallerySection = () => {
         </div>
 
         <div className="mt-16 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
-          {images.map((img, i) => (
+          {images.map((img: string, i: number) => (
             <motion.div
               key={i}
               initial={{ opacity: 0 }}
@@ -50,7 +56,6 @@ const GallerySection = () => {
         </div>
       </div>
 
-      {/* Lightbox */}
       <AnimatePresence>
         {lightbox !== null && (
           <motion.div
