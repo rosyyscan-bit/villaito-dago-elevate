@@ -1,5 +1,4 @@
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import gallery1 from "@/assets/gallery-1.jpg";
 import gallery2 from "@/assets/gallery-2.jpg";
@@ -13,11 +12,10 @@ const AboutSection = () => {
     <section id="about" className="section-padding" ref={ref}>
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-16 lg:grid-cols-2 lg:items-center">
-          {/* Text */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7 }}
           >
             <span className="text-xs font-medium tracking-[0.3em] text-primary">WELCOME TO VILLAITO DAGO</span>
             <h2 className="mt-4 font-display text-4xl font-bold text-foreground md:text-5xl">
@@ -49,37 +47,15 @@ const AboutSection = () => {
             </div>
           </motion.div>
 
-          {/* Image collage */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="grid grid-cols-2 gap-4"
+            initial={{ opacity: 0, y: 24 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="grid grid-cols-2 gap-2"
           >
-            <img
-              src={gallery1}
-              alt="Villa aerial view"
-              loading="lazy"
-              width={1024}
-              height={768}
-              className="col-span-2 rounded-sm object-cover h-64 w-full"
-            />
-            <img
-              src={gallery2}
-              alt="Rooftop terrace"
-              loading="lazy"
-              width={1024}
-              height={768}
-              className="rounded-sm object-cover h-48 w-full"
-            />
-            <img
-              src={gallery3}
-              alt="Living room"
-              loading="lazy"
-              width={1024}
-              height={768}
-              className="rounded-sm object-cover h-48 w-full"
-            />
+            <img src={gallery1} alt="Villa aerial view" loading="lazy" width={1024} height={768} className="col-span-2 object-cover h-64 w-full" />
+            <img src={gallery2} alt="Rooftop terrace" loading="lazy" width={1024} height={768} className="object-cover h-48 w-full" />
+            <img src={gallery3} alt="Living room" loading="lazy" width={1024} height={768} className="object-cover h-48 w-full" />
           </motion.div>
         </div>
       </div>
