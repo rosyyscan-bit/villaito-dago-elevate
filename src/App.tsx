@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
+import FacilitiesPage from "./pages/FacilitiesPage.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminGuard from "./components/AdminGuard.tsx";
 import AdminLayout from "./components/AdminLayout.tsx";
@@ -33,6 +34,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/facilities" element={<FacilitiesPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/admin" element={<AdminLogin />} />

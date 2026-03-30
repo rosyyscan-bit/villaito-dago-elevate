@@ -25,14 +25,14 @@ const GallerySection = () => {
           <div className="gold-line mx-auto mt-6" />
         </div>
 
-        <div className="mt-16 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+        <div className="mt-16 grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-4">
           {images.map((img, i) => (
             <motion.div
               key={i}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.4, delay: i * 0.05 }}
-              className={`cursor-pointer overflow-hidden rounded-sm ${
+              initial={{ opacity: 0 }}
+              animate={inView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              className={`cursor-pointer overflow-hidden ${
                 i === 0 ? "col-span-2 row-span-2" : ""
               }`}
               onClick={() => setLightbox(i)}
@@ -43,7 +43,7 @@ const GallerySection = () => {
                 loading="lazy"
                 width={1024}
                 height={768}
-                className="h-full w-full object-cover transition-transform duration-500 hover:scale-110"
+                className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
               />
             </motion.div>
           ))}
@@ -60,16 +60,16 @@ const GallerySection = () => {
             className="fixed inset-0 z-50 flex items-center justify-center bg-background/95 p-4"
             onClick={() => setLightbox(null)}
           >
-            <button className="absolute right-6 top-6 text-foreground/60 hover:text-foreground">
-              <X size={28} />
+            <button className="absolute right-6 top-6 text-foreground/40 hover:text-foreground transition-colors">
+              <X size={24} />
             </button>
             <motion.img
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
               src={images[lightbox]}
               alt="Gallery fullscreen"
-              className="max-h-[85vh] max-w-[90vw] rounded-sm object-contain"
+              className="max-h-[85vh] max-w-[90vw] object-contain"
             />
           </motion.div>
         )}
