@@ -1,20 +1,19 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRealtimeTable } from "@/hooks/use-realtime-table";
 import bed1 from "@/assets/bedroom-1.jpg";
-import bed2 from "@/assets/bedroom-2.jpg";
-import bed3 from "@/assets/bedroom-3.jpg";
 
-const rooms = [
-  { name: "Lalo Room", desc: "Spacious master bedroom with king-size bed and ensuite bathroom", img: bed1 },
-  { name: "Tinro Room", desc: "Cozy room with tropical garden view and modern amenities", img: bed2 },
-  { name: "Tedok Room", desc: "Elegant suite with wooden accents and natural lighting", img: bed3 },
-  { name: "Modom Room", desc: "Comfortable room with queen bed and private balcony", img: bed1 },
-  { name: "Sare Room", desc: "Contemporary room with mountain view and work desk", img: bed2 },
-  { name: "Sirep Room", desc: "Serene retreat with minimalist design and pool access", img: bed3 },
-  { name: "Bobo Room", desc: "Family-friendly room with extra space and amenities", img: bed1 },
+const fallbackRooms = [
+  { name: "Lalo Room", description: "Spacious master bedroom with king-size bed and ensuite bathroom", image_url: null },
+  { name: "Tinro Room", description: "Cozy room with tropical garden view and modern amenities", image_url: null },
+  { name: "Tedok Room", description: "Elegant suite with wooden accents and natural lighting", image_url: null },
+  { name: "Modom Room", description: "Comfortable room with queen bed and private balcony", image_url: null },
+  { name: "Sare Room", description: "Contemporary room with mountain view and work desk", image_url: null },
+  { name: "Sirep Room", description: "Serene retreat with minimalist design and pool access", image_url: null },
+  { name: "Bobo Room", description: "Family-friendly room with extra space and amenities", image_url: null },
 ];
 
 const BedroomsSection = () => {
@@ -23,13 +22,11 @@ const BedroomsSection = () => {
   const [current, setCurrent] = useState(0);
   const [touchStart, setTouchStart] = useState(0);
 
-  const next = useCallback(() => setCurrent((c) => (c + 1) % rooms.length), []);
-  const prev = useCallback(() => setCurrent((c) => (c - 1 + rooms.length) % rooms.length), []);
+  const { data: dbRooms } = useRealtimeTable("bedrooms");
+  const rooms = dbRooms.length > 0 ? dbRooms : fallbackRooms;
 
-  useEffect(() => {
-    const timer = setInterval(next, 5000);
-    return () => clearInterval(timer);
-  }, [next]);
+  const next = useCallback(() => setCurrent((c) => (c + 1) % rooms.length), [rooms.length]);
+  const prev = useCallback(() => setCurrent((c) => (c - 1 + rooms.length) % rooms.length), [rooms.length]);
 
   const handleTouchStart = (e: React.TouchEvent) => setTouchStart(e.touches[0].clientX);
   const handleTouchEnd = (e: React.TouchEvent) => {
@@ -37,7 +34,6 @@ const BedroomsSection = () => {
     if (Math.abs(diff) > 50) diff > 0 ? next() : prev();
   };
 
-  // Show 3 cards on desktop
   const getVisibleCards = () => {
     const cards = [];
     for (let i = -1; i <= 1; i++) {
@@ -60,7 +56,6 @@ const BedroomsSection = () => {
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          {/* Arrows */}
           <button
             onClick={prev}
             className="absolute -left-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-primary/30 bg-background/80 p-2 text-primary backdrop-blur-sm transition-all hover:bg-primary hover:text-primary-foreground md:-left-6"
@@ -75,7 +70,7 @@ const BedroomsSection = () => {
           </button>
 
           <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {getVisibleCards().map((room, i) => (
+            {getVisibleCards().map((room: any, i) => (
               <motion.div
                 key={`${room.name}-${i}`}
                 initial={{ opacity: 0, y: 20 }}
@@ -86,7 +81,7 @@ const BedroomsSection = () => {
                 }`}
               >
                 <img
-                  src={room.img}
+                  src={room.image_url || bed1}
                   alt={room.name}
                   loading="lazy"
                   width={1024}
@@ -95,15 +90,14 @@ const BedroomsSection = () => {
                 />
                 <div className="p-6">
                   <h3 className="font-display text-xl font-semibold text-foreground">{room.name}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{room.desc}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{room.description}</p>
                 </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Dots */}
           <div className="mt-8 flex justify-center gap-2">
-            {rooms.map((_, i) => (
+            {rooms.map((_: any, i: number) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}

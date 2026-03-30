@@ -6,37 +6,23 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useRealtimeTable } from "@/hooks/use-realtime-table";
 
-const faqs = [
-  {
-    q: "What is the check-in and check-out time?",
-    a: "Check-in is at 14:00 WIB and check-out is at 12:00 WIB. Early check-in or late check-out is subject to availability.",
-  },
-  {
-    q: "How many guests can the villa accommodate?",
-    a: "Villaito can comfortably accommodate up to 20 guests with 7 spacious bedrooms, each with ensuite bathrooms.",
-  },
-  {
-    q: "Is the pool private?",
-    a: "Yes, the villa has a private swimming pool exclusively for our guests. The pool is cleaned and maintained daily.",
-  },
-  {
-    q: "Is parking available?",
-    a: "Yes, we provide free parking for multiple vehicles. The villa is located in the Resort Dago Pakar housing complex with paved roads.",
-  },
-  {
-    q: "Can we host events at the villa?",
-    a: "Yes, the villa is suitable for small gatherings, family reunions, and corporate outings. Please contact us for special arrangements.",
-  },
-  {
-    q: "What amenities are included?",
-    a: "All rates include WiFi, Smart TV with Netflix, BBQ grill, private pool, daily cleaning for public areas, karaoke set, full kitchen access, and more.",
-  },
+const fallbackFaqs = [
+  { question: "What is the check-in and check-out time?", answer: "Check-in is at 14:00 WIB and check-out is at 12:00 WIB." },
+  { question: "How many guests can the villa accommodate?", answer: "Villaito can comfortably accommodate up to 20 guests with 7 spacious bedrooms." },
+  { question: "Is the pool private?", answer: "Yes, the villa has a private swimming pool exclusively for our guests." },
+  { question: "Is parking available?", answer: "Yes, we provide free parking for multiple vehicles." },
+  { question: "Can we host events at the villa?", answer: "Yes, the villa is suitable for small gatherings, family reunions, and corporate outings." },
+  { question: "What amenities are included?", answer: "All rates include WiFi, Smart TV with Netflix, BBQ grill, private pool, daily cleaning for public areas, karaoke set, full kitchen access, and more." },
 ];
 
 const FAQSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  const { data: dbFaqs } = useRealtimeTable("faqs");
+  const faqs = dbFaqs.length > 0 ? dbFaqs : fallbackFaqs;
 
   return (
     <section id="faq" className="section-padding bg-secondary/30" ref={ref}>
@@ -56,17 +42,17 @@ const FAQSection = () => {
           className="mt-12"
         >
           <Accordion type="single" collapsible className="space-y-3">
-            {faqs.map((faq, i) => (
+            {faqs.map((faq: any, i: number) => (
               <AccordionItem
-                key={i}
+                key={faq.id || i}
                 value={`item-${i}`}
                 className="glass-card rounded-sm border-none px-6"
               >
                 <AccordionTrigger className="text-left font-body text-sm text-foreground hover:text-primary hover:no-underline">
-                  {faq.q}
+                  {faq.question}
                 </AccordionTrigger>
                 <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  {faq.a}
+                  {faq.answer}
                 </AccordionContent>
               </AccordionItem>
             ))}
