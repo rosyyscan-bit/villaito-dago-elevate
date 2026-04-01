@@ -11,10 +11,10 @@ const Footer = () => {
   const whatsapp = socialData?.whatsapp || "https://wa.link/vt5ig5";
 
   return (
-    <footer className="border-t border-border/20 bg-background px-6 py-16">
+    <footer className="border-t border-border/20 bg-background px-4 py-12 sm:px-6 sm:py-16">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-12 md:grid-cols-4">
-          <div className="md:col-span-1">
+        <div className="grid gap-8 sm:gap-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+          <div className="sm:col-span-2 md:col-span-1">
             <div className="flex items-center gap-3">
               <img src={logo} alt="Villaito" className="h-9 w-9" />
               <div className="flex flex-col leading-tight">
@@ -31,7 +31,7 @@ const Footer = () => {
             <h4 className="text-xs font-medium tracking-wider text-foreground/80 uppercase">Quick Links</h4>
             <div className="mt-4 space-y-3">
               {["Home", "Rates", "Blog"].map((link) => (
-                <a key={link} href={link === "Blog" ? "/blog" : `#${link.toLowerCase()}`} className="block text-sm text-muted-foreground hover:text-foreground transition-colors duration-300">
+                <a key={link} href={link === "Blog" ? "/blog" : link === "Home" ? "/" : `#${link.toLowerCase()}`} className="block text-sm text-muted-foreground hover:text-foreground transition-colors duration-300">
                   {link}
                 </a>
               ))}
@@ -70,7 +70,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-border/10 pt-8 text-center text-xs text-muted-foreground/60">
+        <div className="mt-10 sm:mt-12 border-t border-border/10 pt-6 sm:pt-8 text-center text-xs text-muted-foreground/60">
           © {new Date().getFullYear()} Villaito Dago. All rights reserved.
         </div>
       </div>

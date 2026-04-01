@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Trash2 } from "lucide-react";
+import FileUpload from "@/components/FileUpload";
 
 const AdminGallery = () => {
   const { toast } = useToast();
@@ -31,7 +32,35 @@ const AdminGallery = () => {
       <div className="glass-card rounded-sm p-6">
         <h3 className="font-display text-lg font-semibold text-foreground mb-4">Add Media</h3>
         <div className="space-y-3">
-          <Input placeholder="Image/Video URL" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} className="bg-secondary/50" />
+          <div className="space-y-2">
+            <Input placeholder="Image/Video URL" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} className="bg-secondary/50" />
+            <div className="flex gap-2">
+              <FileUpload
+                onUpload={(url) => setImageUrl(url)}
+                folder="gallery"
+                label="Upload Image"
+                accept="image/*"
+              />
+              <FileUpload
+                onUpload={(url) => { setImageUrl(url); setMediaType("video"); }}
+                folder="gallery"
+                label="Upload Video"
+                accept="video/*"
+              />
+            </div>
+            {imageUrl && (
+              <div className="relative inline-block">
+                {mediaType === "video" ? (
+                  <video src={imageUrl} className="h-24 w-36 object-cover rounded-sm" />
+                ) : (
+                  <img src={imageUrl} alt="Preview" className="h-24 w-36 object-cover rounded-sm" />
+                )}
+                <button onClick={() => setImageUrl("")} className="absolute -right-1 -top-1 rounded-full bg-destructive p-1 text-destructive-foreground">
+                  <Trash2 size={10} />
+                </button>
+              </div>
+            )}
+          </div>
           <Input placeholder="Caption (optional)" value={caption} onChange={(e) => setCaption(e.target.value)} className="bg-secondary/50" />
           <select value={mediaType} onChange={(e) => setMediaType(e.target.value)} className="w-full rounded-sm border border-border bg-secondary/50 p-2 text-sm text-foreground">
             <option value="image">Image</option>

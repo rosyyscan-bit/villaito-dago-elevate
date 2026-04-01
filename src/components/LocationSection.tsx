@@ -18,7 +18,7 @@ const LocationSection = () => {
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
           <span className="text-xs font-medium tracking-[0.3em] text-primary">LOCATION</span>
-          <h2 className="mt-4 font-display text-4xl font-bold text-foreground">Our Location</h2>
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold text-foreground">Our Location</h2>
           <div className="gold-line mx-auto mt-6" />
         </div>
 
@@ -26,18 +26,19 @@ const LocationSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mt-16 grid gap-8 lg:grid-cols-2"
+          className="mt-12 sm:mt-16 grid gap-8 lg:grid-cols-2"
         >
           <div className="overflow-hidden rounded-sm">
             <iframe
               src={mapUrl}
               width="100%"
-              height="400"
+              height="300"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               title="Villaito Dago Location"
+              className="sm:h-[400px]"
             />
           </div>
 
@@ -50,7 +51,7 @@ const LocationSection = () => {
               </div>
             </div>
 
-            <div className="mt-8 flex items-start gap-4">
+            <div className="mt-6 sm:mt-8 flex items-start gap-4">
               <Navigation className="mt-1 h-5 w-5 flex-shrink-0 text-primary" />
               <div>
                 <h3 className="font-display text-lg font-semibold text-foreground">Easy Access</h3>
@@ -62,7 +63,7 @@ const LocationSection = () => {
               href="https://www.google.com/maps/dir//Jalan+Dago+Pakar+Permai+I+No.21,+Mekarsaluyu,+Kabupaten+Bandung,+Jawa+Barat"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-10 inline-flex w-fit items-center gap-2 rounded-sm border border-primary bg-primary/10 px-6 py-3 text-sm font-medium text-primary transition-all hover:bg-primary hover:text-primary-foreground"
+              className="mt-8 sm:mt-10 inline-flex w-fit items-center gap-2 rounded-sm border border-primary bg-primary/10 px-6 py-3 text-sm font-medium text-primary transition-all hover:bg-primary hover:text-primary-foreground"
             >
               <Navigation size={16} />
               Get Directions

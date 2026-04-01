@@ -47,37 +47,38 @@ const BedroomsSection = () => {
       <div className="mx-auto max-w-7xl">
         <div className="text-center">
           <span className="text-xs font-medium tracking-[0.3em] text-primary">ACCOMMODATION</span>
-          <h2 className="mt-4 font-display text-4xl font-bold text-foreground">Bedrooms</h2>
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold text-foreground">Bedrooms</h2>
           <div className="gold-line mx-auto mt-6" />
         </div>
 
         <div
-          className="relative mt-16"
+          className="relative mt-12 sm:mt-16"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
           <button
             onClick={prev}
-            className="absolute -left-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-primary/30 bg-background/80 p-2 text-primary backdrop-blur-sm transition-all hover:bg-primary hover:text-primary-foreground md:-left-6"
+            className="absolute -left-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-primary/30 bg-background/80 p-2 text-primary backdrop-blur-sm transition-all hover:bg-primary hover:text-primary-foreground sm:-left-4 md:-left-6"
           >
-            <ChevronLeft size={20} />
+            <ChevronLeft size={18} />
           </button>
           <button
             onClick={next}
-            className="absolute -right-4 top-1/2 z-10 -translate-y-1/2 rounded-full border border-primary/30 bg-background/80 p-2 text-primary backdrop-blur-sm transition-all hover:bg-primary hover:text-primary-foreground md:-right-6"
+            className="absolute -right-2 top-1/2 z-10 -translate-y-1/2 rounded-full border border-primary/30 bg-background/80 p-2 text-primary backdrop-blur-sm transition-all hover:bg-primary hover:text-primary-foreground sm:-right-4 md:-right-6"
           >
-            <ChevronRight size={20} />
+            <ChevronRight size={18} />
           </button>
 
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {/* Mobile: show 1, Desktop: show 3 */}
+          <div className="hidden md:grid grid-cols-3 gap-6">
             {getVisibleCards().map((room: any, i) => (
               <motion.div
                 key={`${room.name}-${i}`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`glass-card overflow-hidden rounded-sm transition-all ${
-                  i === 1 ? "md:scale-105 md:shadow-2xl" : "md:opacity-80"
+                className={`overflow-hidden rounded-sm border border-border/20 transition-all ${
+                  i === 1 ? "scale-105 shadow-2xl" : "opacity-80"
                 }`}
               >
                 <img
@@ -88,12 +89,34 @@ const BedroomsSection = () => {
                   height={768}
                   className="h-56 w-full object-cover"
                 />
-                <div className="p-6">
+                <div className="p-6 bg-card">
                   <h3 className="font-display text-xl font-semibold text-foreground">{room.name}</h3>
                   <p className="mt-2 text-sm text-muted-foreground">{room.description}</p>
                 </div>
               </motion.div>
             ))}
+          </div>
+
+          {/* Mobile: single card */}
+          <div className="md:hidden">
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden rounded-sm border border-border/20 mx-6"
+            >
+              <img
+                src={rooms[current]?.image_url || bed1}
+                alt={rooms[current]?.name}
+                loading="lazy"
+                className="h-48 w-full object-cover"
+              />
+              <div className="p-5 bg-card">
+                <h3 className="font-display text-lg font-semibold text-foreground">{rooms[current]?.name}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{rooms[current]?.description}</p>
+              </div>
+            </motion.div>
           </div>
 
           <div className="mt-8 flex justify-center gap-2">

@@ -41,13 +41,13 @@ const FacilitiesSection = () => {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-4 font-display text-4xl font-bold text-foreground"
+          className="mt-4 font-display text-3xl sm:text-4xl font-bold text-foreground"
         >
           Facilities & Services
         </motion.h2>
         <div className="gold-line mx-auto mt-6" />
 
-        <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-3">
+        <div className="mt-12 sm:mt-16 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
           {facilities.map((f: any, i: number) => {
             const IconComponent = iconMap[f.icon] || Sparkles;
             return (
@@ -56,10 +56,10 @@ const FacilitiesSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.4, delay: 0.15 + i * 0.05 }}
-                className="group flex flex-col items-center gap-3 border border-border/20 p-6 transition-colors duration-300 hover:border-primary/30"
+                className="group flex flex-col items-center gap-2 sm:gap-3 border border-border/20 p-4 sm:p-6 transition-colors duration-300 hover:border-primary/30"
               >
-                <IconComponent className="h-7 w-7 text-primary transition-transform duration-300 group-hover:scale-105" />
-                <span className="text-sm text-foreground/80">{f.title}</span>
+                <IconComponent className="h-6 w-6 sm:h-7 sm:w-7 text-primary transition-transform duration-300 group-hover:scale-105" />
+                <span className="text-xs sm:text-sm text-foreground/80 text-center">{f.title}</span>
               </motion.div>
             );
           })}
@@ -69,7 +69,7 @@ const FacilitiesSection = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-10"
+          className="mt-8 sm:mt-10"
         >
           <Link
             to="/facilities"
