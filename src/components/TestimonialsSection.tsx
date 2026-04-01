@@ -27,7 +27,7 @@ const TestimonialsSection = () => {
     <section className="section-padding" ref={ref}>
       <div className="mx-auto max-w-4xl text-center">
         <span className="text-xs font-medium tracking-[0.3em] text-primary">TESTIMONY</span>
-        <h2 className="mt-4 font-display text-4xl font-bold text-foreground">Hear from Our Guests</h2>
+        <h2 className="mt-4 font-display text-3xl sm:text-4xl font-bold text-foreground">Hear from Our Guests</h2>
         <div className="gold-line mx-auto mt-6" />
 
         <motion.div
@@ -35,19 +35,19 @@ const TestimonialsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="glass-card mt-16 rounded-sm p-8 md:p-12"
+          className="mt-12 sm:mt-16 border border-border/20 rounded-sm p-6 sm:p-8 md:p-12"
         >
           <div className="flex justify-center gap-1 mb-4">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+              <Star key={i} className="h-3 w-3 sm:h-4 sm:w-4 fill-primary text-primary" />
             ))}
           </div>
-          <h3 className="font-display text-xl font-semibold text-foreground">{t.title}</h3>
-          <p className="mt-4 text-muted-foreground leading-relaxed italic">"{t.text}"</p>
+          <h3 className="font-display text-lg sm:text-xl font-semibold text-foreground">{t.title}</h3>
+          <p className="mt-4 text-sm sm:text-base text-muted-foreground leading-relaxed italic">"{t.text}"</p>
           <p className="mt-6 text-sm font-medium text-primary">— {t.name}</p>
         </motion.div>
 
-        <div className="mt-8 flex items-center justify-center gap-4">
+        <div className="mt-6 sm:mt-8 flex items-center justify-center gap-4">
           <button onClick={prev} className="rounded-full border border-border p-2 text-foreground/60 hover:text-primary hover:border-primary transition-colors">
             <ChevronLeft size={18} />
           </button>
