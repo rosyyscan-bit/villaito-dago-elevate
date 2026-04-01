@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "@/assets/logo.png";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
-  { label: "Home", href: "#hero", isRoute: false },
+  { label: "Home", href: "/", isRoute: true },
   { label: "Rates", href: "#rates", isRoute: false },
   { label: "Blog", href: "/blog", isRoute: true },
 ];
@@ -13,12 +13,29 @@ const navItems = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
   }, []);
+
+  const handleNavClick = (item: typeof navItems[0]) => {
+    setOpen(false);
+    if (item.isRoute) {
+      navigate(item.href);
+    } else {
+      // Hash link - if not on homepage, navigate there first
+      if (location.pathname !== "/") {
+        navigate("/" + item.href);
+      } else {
+        const el = document.querySelector(item.href);
+        el?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <motion.nav
@@ -29,36 +46,26 @@ const Navbar = () => {
         scrolled ? "bg-background/95 backdrop-blur-sm border-b border-border/20" : "bg-transparent"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-        <a href="#hero" className="flex items-center gap-3">
-          <img src={logo} alt="Villaito" className="h-9 w-9" />
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 sm:py-5">
+        <Link to="/" className="flex items-center gap-2 sm:gap-3">
+          <img src={logo} alt="Villaito" className="h-8 w-8 sm:h-9 sm:w-9" />
           <div className="flex flex-col leading-tight">
-            <span className="font-display text-lg font-semibold text-primary">Villaito</span>
-            <span className="text-[9px] tracking-[0.3em] text-foreground/60 uppercase">Dago</span>
+            <span className="font-display text-base sm:text-lg font-semibold text-primary">Villaito</span>
+            <span className="text-[8px] sm:text-[9px] tracking-[0.3em] text-foreground/60 uppercase">Dago</span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop */}
         <div className="hidden items-center gap-10 md:flex">
-          {navItems.map((item) =>
-            item.isRoute ? (
-              <Link
-                key={item.label}
-                to={item.href}
-                className="text-[13px] font-medium tracking-wide text-foreground/70 transition-colors duration-300 hover:text-foreground"
-              >
-                {item.label}
-              </Link>
-            ) : (
-              <a
-                key={item.label}
-                href={item.href}
-                className="text-[13px] font-medium tracking-wide text-foreground/70 transition-colors duration-300 hover:text-foreground"
-              >
-                {item.label}
-              </a>
-            )
-          )}
+          {navItems.map((item) => (
+            <button
+              key={item.label}
+              onClick={() => handleNavClick(item)}
+              className="text-[13px] font-medium tracking-wide text-foreground/70 transition-colors duration-300 hover:text-foreground bg-transparent border-none cursor-pointer"
+            >
+              {item.label}
+            </button>
+          ))}
           <a
             href="https://wa.link/vt5ig5"
             target="_blank"
@@ -83,27 +90,15 @@ const Navbar = () => {
           transition={{ duration: 0.2 }}
           className="bg-background border-b border-border/20 px-6 pb-6 md:hidden"
         >
-          {navItems.map((item) =>
-            item.isRoute ? (
-              <Link
-                key={item.label}
-                to={item.href}
-                onClick={() => setOpen(false)}
-                className="block py-3 text-sm text-foreground/70 border-b border-border/10"
-              >
-                {item.label}
-              </Link>
-            ) : (
-              <a
-                key={item.label}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="block py-3 text-sm text-foreground/70 border-b border-border/10"
-              >
-                {item.label}
-              </a>
-            )
-          )}
+          {navItems.map((item) => (
+            <button
+              key={item.label}
+              onClick={() => handleNavClick(item)}
+              className="block w-full text-left py-3 text-sm text-foreground/70 border-b border-border/10 bg-transparent cursor-pointer"
+            >
+              {item.label}
+            </button>
+          ))}
           <a
             href="https://wa.link/vt5ig5"
             target="_blank"
