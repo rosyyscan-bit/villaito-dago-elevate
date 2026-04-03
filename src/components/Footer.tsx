@@ -30,9 +30,14 @@ const Footer = () => {
           <div>
             <h4 className="text-xs font-medium tracking-wider text-foreground/80 uppercase">Quick Links</h4>
             <div className="mt-4 space-y-3">
-              {["Home", "Rates", "Blog"].map((link) => (
-                <a key={link} href={link === "Blog" ? "/blog" : link === "Home" ? "/" : `#${link.toLowerCase()}`} className="block text-sm text-muted-foreground hover:text-foreground transition-colors duration-300">
-                  {link}
+              {[
+                { label: "Home", href: "/" },
+                { label: "Rates", href: "#rates" },
+                { label: "Blog", href: "/blog" },
+                { label: "Floor Plan", href: "/floorplan" },
+              ].map((link) => (
+                <a key={link.label} href={link.href} className="block text-sm text-muted-foreground hover:text-foreground transition-colors duration-300">
+                  {link.label}
                 </a>
               ))}
             </div>

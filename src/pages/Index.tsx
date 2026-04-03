@@ -11,7 +11,7 @@ import FAQSection from "@/components/FAQSection";
 import GallerySection from "@/components/GallerySection";
 import LocationSection from "@/components/LocationSection";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
+
 
 const Index = () => {
   const [introComplete, setIntroComplete] = useState(false);
@@ -32,7 +32,6 @@ const Index = () => {
         <GallerySection />
         <LocationSection />
         <Footer />
-        <WhatsAppButton />
       </div>
     </>
   );

@@ -23,6 +23,8 @@ import AdminSocial from "./pages/admin/AdminSocial.tsx";
 import AdminNavigation from "./pages/admin/AdminNavigation.tsx";
 import AdminAccount from "./pages/admin/AdminAccount.tsx";
 import { BlogPage, BlogPost } from "./pages/BlogPage.tsx";
+import FloorPlanPage from "./pages/FloorPlanPage.tsx";
+import WhatsAppButton from "./components/WhatsAppButton.tsx";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +37,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/facilities" element={<FacilitiesPage />} />
+          <Route path="/floorplan" element={<FloorPlanPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/admin" element={<AdminLogin />} />
@@ -55,6 +58,7 @@ const App = () => (
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <WhatsAppButton />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -58,7 +58,11 @@ const FacilitiesSection = () => {
                 transition={{ duration: 0.4, delay: 0.15 + i * 0.05 }}
                 className="group flex flex-col items-center gap-2 sm:gap-3 border border-border/20 p-4 sm:p-6 transition-colors duration-300 hover:border-primary/30"
               >
-                <IconComponent className="h-6 w-6 sm:h-7 sm:w-7 text-primary transition-transform duration-300 group-hover:scale-105" />
+                {f.icon_url ? (
+                  <img src={f.icon_url} alt="" className="h-6 w-6 sm:h-7 sm:w-7 object-contain transition-transform duration-300 group-hover:scale-105" />
+                ) : (
+                  <IconComponent className="h-6 w-6 sm:h-7 sm:w-7 text-primary transition-transform duration-300 group-hover:scale-105" />
+                )}
                 <span className="text-xs sm:text-sm text-foreground/80 text-center">{f.title}</span>
               </motion.div>
             );
