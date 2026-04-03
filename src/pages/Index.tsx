@@ -32,7 +32,6 @@ const Index = () => {
         <GallerySection />
         <LocationSection />
         <Footer />
-        <WhatsAppButton />
       </div>
     </>
   );
