@@ -3,7 +3,7 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Home, Bed, Image, Settings, FileText, HelpCircle, Star,
-  DollarSign, Menu, LogOut, User, MapPin, Share2, LayoutDashboard, X
+  DollarSign, Menu, LogOut, User, MapPin, Share2, LayoutDashboard, X, MapPinned
 } from "lucide-react";
 import logo from "@/assets/logo.png";
 
