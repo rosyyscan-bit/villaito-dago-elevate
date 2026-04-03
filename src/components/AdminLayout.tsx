@@ -3,7 +3,7 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Home, Bed, Image, Settings, FileText, HelpCircle, Star,
-  DollarSign, Menu, LogOut, User, MapPin, Share2, LayoutDashboard, X
+  DollarSign, Menu, LogOut, User, MapPin, Share2, LayoutDashboard, X, MapPinned
 } from "lucide-react";
 import logo from "@/assets/logo.png";
 
@@ -12,6 +12,7 @@ const sidebarItems = [
   { label: "Homepage", icon: Home, path: "/admin/homepage" },
   { label: "Bedrooms", icon: Bed, path: "/admin/bedrooms" },
   { label: "Facilities", icon: Settings, path: "/admin/facilities" },
+  { label: "Floor Plans", icon: MapPinned, path: "/admin/floorplans" },
   { label: "Rates", icon: DollarSign, path: "/admin/rates" },
   { label: "Gallery", icon: Image, path: "/admin/gallery" },
   { label: "Blog", icon: FileText, path: "/admin/blog" },
