@@ -12,6 +12,7 @@ const sidebarItems = [
   { label: "Homepage", icon: Home, path: "/admin/homepage" },
   { label: "Bedrooms", icon: Bed, path: "/admin/bedrooms" },
   { label: "Facilities", icon: Settings, path: "/admin/facilities" },
+  { label: "Floor Plans", icon: Map, path: "/admin/floorplans" },
   { label: "Rates", icon: DollarSign, path: "/admin/rates" },
   { label: "Gallery", icon: Image, path: "/admin/gallery" },
   { label: "Blog", icon: FileText, path: "/admin/blog" },
