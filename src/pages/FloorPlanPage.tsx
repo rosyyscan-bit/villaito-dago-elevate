@@ -1,12 +1,20 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import floorplanImg1 from "@/assets/floorplan-basement-floor1.png";
-import floorplanImg2 from "@/assets/floorplan-floor2-rooftop.png";
 
 const FloorPlanPage = () => {
+  const [plans, setPlans] = useState<any[]>([]);
+
+  useEffect(() => {
+    supabase.from("floor_plans").select("*").order("sort_order").then(({ data }) => {
+      if (data) setPlans(data);
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -33,29 +41,32 @@ const FloorPlanPage = () => {
         </motion.div>
 
         <div className="space-y-12 sm:space-y-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
-            <img
-              src={floorplanImg1}
-              alt="Floor Plan - Basement & Lantai 1"
-              className="w-full rounded-sm border border-border/10"
-            />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            <img
-              src={floorplanImg2}
-              alt="Floor Plan - Lantai 2 & Rooftop"
-              className="w-full rounded-sm border border-border/10"
-            />
-          </motion.div>
+          {plans.map((plan, i) => (
+            <motion.div
+              key={plan.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 * i }}
+              className="flex flex-col md:flex-row gap-6 items-start"
+            >
+              {plan.image_url && (
+                <img
+                  src={plan.image_url}
+                  alt={plan.title}
+                  className="w-full md:w-2/3 rounded-sm border border-border/10"
+                />
+              )}
+              <div className="flex-1">
+                <h2 className="font-display text-xl font-semibold text-foreground">{plan.title}</h2>
+                {plan.description && (
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{plan.description}</p>
+                )}
+              </div>
+            </motion.div>
+          ))}
+          {plans.length === 0 && (
+            <p className="text-center text-muted-foreground">No floor plans available yet.</p>
+          )}
         </div>
       </div>
       <Footer />
