@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
-type TableName = "bedrooms" | "facilities" | "rates" | "faqs" | "testimonials" | "gallery" | "site_settings";
+type TableName = "bedrooms" | "facilities" | "rates" | "faqs" | "testimonials" | "gallery" | "site_settings" | "floor_plans";
 
 export function useRealtimeTable<T = any>(
   table: TableName,
