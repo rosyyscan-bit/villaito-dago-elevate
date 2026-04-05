@@ -1,0 +1,1 @@
+ALTER TABLE public.facilities ADD COLUMN category text NOT NULL DEFAULT 'Others';

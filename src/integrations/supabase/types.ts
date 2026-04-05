@@ -85,6 +85,7 @@ export type Database = {
       }
       facilities: {
         Row: {
+          category: string
           created_at: string
           icon: string
           icon_url: string | null
@@ -94,6 +95,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          category?: string
           created_at?: string
           icon?: string
           icon_url?: string | null
@@ -103,6 +105,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          category?: string
           created_at?: string
           icon?: string
           icon_url?: string | null
