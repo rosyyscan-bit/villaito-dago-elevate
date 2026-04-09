@@ -8,6 +8,7 @@ const navItems = [
   { label: "Home", href: "/", isRoute: true },
   { label: "Rates", href: "#rates", isRoute: false },
   { label: "Blog", href: "/blog", isRoute: true },
+  { label: "How To Book", href: "/how-to-book", isRoute: true },
 ];
 
 const Navbar = () => {
@@ -27,7 +28,6 @@ const Navbar = () => {
     if (item.isRoute) {
       navigate(item.href);
     } else {
-      // Hash link - if not on homepage, navigate there first
       if (location.pathname !== "/") {
         navigate("/" + item.href);
       } else {
@@ -56,7 +56,7 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop */}
-        <div className="hidden items-center gap-10 md:flex">
+        <div className="hidden items-center gap-8 md:flex">
           {navItems.map((item) => (
             <button
               key={item.label}
