@@ -1,0 +1,1 @@
+UPDATE site_settings SET value = jsonb_set(value, '{mapUrl}', '"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.0!2d107.636101!3d-6.8676097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e718f1abbabd%3A0x6527e7198547cb50!2sVillaito%20Dago!5e0!3m2!1sen!2sid!4v1700000000000!5m2!1sen!2sid"') WHERE key = 'location';
