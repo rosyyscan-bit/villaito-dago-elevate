@@ -23,8 +23,10 @@ import AdminLocation from "./pages/admin/AdminLocation.tsx";
 import AdminSocial from "./pages/admin/AdminSocial.tsx";
 import AdminNavigation from "./pages/admin/AdminNavigation.tsx";
 import AdminAccount from "./pages/admin/AdminAccount.tsx";
+import AdminHowToBook from "./pages/admin/AdminHowToBook.tsx";
 import { BlogPage, BlogPost } from "./pages/BlogPage.tsx";
 import FloorPlanPage from "./pages/FloorPlanPage.tsx";
+import HowToBookPage from "./pages/HowToBookPage.tsx";
 import WhatsAppButton from "./components/WhatsAppButton.tsx";
 
 const queryClient = new QueryClient();
