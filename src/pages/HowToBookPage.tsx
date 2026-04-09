@@ -119,12 +119,35 @@ const HowToBookPage = () => {
           </div>
 
           {howToImages.length > 0 ? (
-            <div className="space-y-6">
-              {howToImages.map((img: string, i: number) => (
-                <div key={i} className="overflow-hidden rounded-sm border border-border">
-                  <img src={img} alt={`Step ${i + 1}`} className="w-full object-contain" />
+            <div className="flex flex-col items-center gap-6">
+              {/* Top row: first 3 images */}
+              <div className="flex flex-wrap justify-center gap-6">
+                {howToImages.slice(0, 3).map((img: string, i: number) => (
+                  <div key={i} className="w-[352px] h-[468px] overflow-hidden rounded-sm border border-border flex-shrink-0">
+                    <img src={img} alt={`Step ${i + 1}`} className="w-full h-full object-cover" />
+                  </div>
+                ))}
+              </div>
+              {/* Bottom row: next 2 images, offset/staggered */}
+              {howToImages.length > 3 && (
+                <div className="flex flex-wrap justify-center gap-6">
+                  {howToImages.slice(3, 5).map((img: string, i: number) => (
+                    <div key={i + 3} className="w-[352px] h-[468px] overflow-hidden rounded-sm border border-border flex-shrink-0">
+                      <img src={img} alt={`Step ${i + 4}`} className="w-full h-full object-cover" />
+                    </div>
+                  ))}
                 </div>
-              ))}
+              )}
+              {/* Remaining images if more than 5 */}
+              {howToImages.length > 5 && (
+                <div className="flex flex-wrap justify-center gap-6">
+                  {howToImages.slice(5).map((img: string, i: number) => (
+                    <div key={i + 5} className="w-[352px] h-[468px] overflow-hidden rounded-sm border border-border flex-shrink-0">
+                      <img src={img} alt={`Step ${i + 6}`} className="w-full h-full object-cover" />
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           ) : (
             <div className="rounded-sm border border-border/40 bg-card p-12 text-center">
