@@ -41,6 +41,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Index />} />
         <Route path="/facilities" element={<FacilitiesPage />} />
         <Route path="/floorplan" element={<FloorPlanPage />} />
+        <Route path="/how-to-book" element={<HowToBookPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
         <Route path="/admin" element={<AdminLogin />} />
@@ -58,6 +59,7 @@ const AppRoutes = () => {
           <Route path="location" element={<AdminLocation />} />
           <Route path="social" element={<AdminSocial />} />
           <Route path="navigation" element={<AdminNavigation />} />
+          <Route path="how-to-book" element={<AdminHowToBook />} />
           <Route path="account" element={<AdminAccount />} />
         </Route>
         <Route path="*" element={<NotFound />} />
