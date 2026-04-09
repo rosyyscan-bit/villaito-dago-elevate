@@ -3,7 +3,7 @@ import { Outlet, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Home, Bed, Image, Settings, FileText, HelpCircle, Star,
-  DollarSign, Menu, LogOut, User, MapPin, Share2, LayoutDashboard, X, MapPinned
+  DollarSign, Menu, LogOut, User, MapPin, Share2, LayoutDashboard, X, MapPinned, BookOpen
 } from "lucide-react";
 import logo from "@/assets/logo.png";
 
@@ -21,6 +21,7 @@ const sidebarItems = [
   { label: "Location", icon: MapPin, path: "/admin/location" },
   { label: "Social Media", icon: Share2, path: "/admin/social" },
   { label: "Navigation", icon: Menu, path: "/admin/navigation" },
+  { label: "How To Book", icon: BookOpen, path: "/admin/how-to-book" },
   { label: "Account", icon: User, path: "/admin/account" },
 ];
 
