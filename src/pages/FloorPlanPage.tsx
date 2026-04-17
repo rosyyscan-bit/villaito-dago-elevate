@@ -58,9 +58,26 @@ const FloorPlanPage = () => {
               )}
               <div className="flex-1">
                 <h2 className="font-display text-xl font-semibold text-foreground">{plan.title}</h2>
-                {plan.description && (
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{plan.description}</p>
-                )}
+                {plan.description && (() => {
+                  // Parse "1 - text 2 - text" or "1 – text 2 – text" patterns into list
+                  const parts = plan.description.split(/\s*(?=\d+\s*[-–]\s)/).map((s: string) => s.trim()).filter(Boolean);
+                  const isList = parts.length > 1 && parts.every((p: string) => /^\d+\s*[-–]\s/.test(p));
+                  return isList ? (
+                    <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground leading-relaxed">
+                      {parts.map((item: string, idx: number) => {
+                        const match = item.match(/^(\d+)\s*[-–]\s*(.+)$/);
+                        return (
+                          <li key={idx} className="flex gap-2">
+                            <span className="text-primary font-medium flex-shrink-0">{match?.[1]}.</span>
+                            <span>{match?.[2] || item}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{plan.description}</p>
+                  );
+                })()}
               </div>
             </motion.div>
           ))}
