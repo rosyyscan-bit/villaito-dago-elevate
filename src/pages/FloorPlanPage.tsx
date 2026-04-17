@@ -6,6 +6,53 @@ import { supabase } from "@/integrations/supabase/client";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
+type FloorPlanDescriptionItem = {
+  number: string;
+  text: string;
+};
+
+const parseFloorPlanDescription = (
+  description: string | null,
+): FloorPlanDescriptionItem[] | null => {
+  if (!description) return null;
+
+  const normalized = description.replace(/\r/g, "").trim();
+
+  if (!normalized) return null;
+
+  const numberedLinePattern = /^(\d+)\s*[-–]\s*(.+)$/;
+  const lines = normalized
+    .split(/\n+/)
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  if (lines.length > 1) {
+    const lineMatches = lines
+      .map((line) => line.match(numberedLinePattern))
+      .filter((match): match is RegExpMatchArray => Boolean(match));
+
+    if (lineMatches.length === lines.length) {
+      return lineMatches.map((match) => ({
+        number: match[1],
+        text: match[2].trim(),
+      }));
+    }
+  }
+
+  const inlineMatches = [
+    ...normalized.matchAll(/(\d+)\s*[-–]\s*([^]+?)(?=(?:\s+\d+\s*[-–]\s)|$)/g),
+  ];
+
+  if (inlineMatches.length > 0) {
+    return inlineMatches.map((match) => ({
+      number: match[1],
+      text: match[2].replace(/\s+/g, " ").trim(),
+    }));
+  }
+
+  return null;
+};
+
 const FloorPlanPage = () => {
   const [plans, setPlans] = useState<any[]>([]);
 
@@ -49,6 +96,11 @@ const FloorPlanPage = () => {
               transition={{ duration: 0.5, delay: 0.1 * i }}
               className="flex flex-col md:flex-row gap-6 items-start"
             >
+              {(() => {
+                const descriptionItems = parseFloorPlanDescription(plan.description);
+
+                return (
+                  <>
               {plan.image_url && (
                 <img
                   src={plan.image_url}
@@ -58,27 +110,24 @@ const FloorPlanPage = () => {
               )}
               <div className="flex-1">
                 <h2 className="font-display text-xl font-semibold text-foreground">{plan.title}</h2>
-                {plan.description && (() => {
-                  // Parse "1 - text 2 - text" or "1 – text 2 – text" patterns into list
-                  const parts = plan.description.split(/\s*(?=\d+\s*[-–]\s)/).map((s: string) => s.trim()).filter(Boolean);
-                  const isList = parts.length > 1 && parts.every((p: string) => /^\d+\s*[-–]\s/.test(p));
-                  return isList ? (
-                    <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground leading-relaxed">
-                      {parts.map((item: string, idx: number) => {
-                        const match = item.match(/^(\d+)\s*[-–]\s*(.+)$/);
-                        return (
-                          <li key={idx} className="flex gap-2">
-                            <span className="text-primary font-medium flex-shrink-0">{match?.[1]}.</span>
-                            <span>{match?.[2] || item}</span>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  ) : (
-                    <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{plan.description}</p>
-                  );
-                })()}
+                {descriptionItems ? (
+                  <ol className="mt-3 space-y-2 text-sm text-muted-foreground leading-relaxed">
+                    {descriptionItems.map((item) => (
+                      <li key={`${plan.id}-${item.number}`} className="flex items-start gap-3">
+                        <span className="min-w-6 text-primary font-medium">{item.number}.</span>
+                        <span>{item.text}</span>
+                      </li>
+                    ))}
+                  </ol>
+                ) : plan.description ? (
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed whitespace-pre-line">
+                    {plan.description}
+                  </p>
+                ) : null}
               </div>
+                  </>
+                );
+              })()}
             </motion.div>
           ))}
           {plans.length === 0 && (
