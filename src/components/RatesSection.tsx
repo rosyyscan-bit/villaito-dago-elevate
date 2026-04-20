@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { useRealtimeTable } from "@/hooks/use-realtime-table";
+import { useRealtimeTable, useRealtimeSetting } from "@/hooks/use-realtime-table";
 
 const fallbackRates = [
   { title: "Weekdays", subtitle: "Sunday – Thursday", price: "Rp 7.000.000", per: "/ night" },
@@ -21,6 +21,10 @@ const RatesSection = () => {
 
   const { data: dbRates } = useRealtimeTable("rates");
   const rates = dbRates.length > 0 ? dbRates : fallbackRates;
+  const { value: notesSetting } = useRealtimeSetting("rates_notes");
+  const notes: string[] = Array.isArray(notesSetting?.notes) && notesSetting.notes.length > 0
+    ? notesSetting.notes
+    : defaultNotes;
 
   return (
     <section id="rates" className="section-padding" ref={ref}>
@@ -80,7 +84,7 @@ const RatesSection = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-8 sm:mt-12 space-y-2 text-left"
         >
-          {defaultNotes.map((note) => (
+          {notes.map((note) => (
             <p key={note} className="flex items-start gap-2 text-[10px] sm:text-xs text-muted-foreground">
               <span className="mt-1.5 h-1 w-1 rounded-full bg-muted-foreground/50 flex-shrink-0" />
               {note}
