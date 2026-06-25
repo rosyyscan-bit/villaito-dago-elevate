@@ -11,6 +11,7 @@ const WhatsAppButton = () => {
       href="https://wa.link/vt5ig5"
       target="_blank"
       rel="noopener noreferrer"
+      onClick={(e) => { e.preventDefault(); (window as any).gtag_report_conversion?.((e.currentTarget as HTMLAnchorElement).href); }}
       className="fixed bottom-6 right-6 z-50 border border-primary/40 bg-background/90 px-5 py-3 text-[13px] font-medium tracking-wider text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
