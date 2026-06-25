@@ -104,6 +104,7 @@ const Navbar = () => {
             href="https://wa.link/vt5ig5"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => { e.preventDefault(); (window as any).gtag_report_conversion?.((e.currentTarget as HTMLAnchorElement).href); }}
             className="mt-4 block border border-primary/40 py-3 text-center text-sm font-medium tracking-wider text-primary"
           >
             Book Now
