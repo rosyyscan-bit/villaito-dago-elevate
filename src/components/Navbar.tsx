@@ -70,6 +70,7 @@ const Navbar = () => {
             href="https://wa.link/vt5ig5"
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => { e.preventDefault(); (window as any).gtag_report_conversion?.((e.currentTarget as HTMLAnchorElement).href); }}
             className="border border-primary/40 px-6 py-2 text-[13px] font-medium tracking-wider text-primary transition-all duration-300 hover:bg-primary hover:text-primary-foreground"
           >
             Book Now
