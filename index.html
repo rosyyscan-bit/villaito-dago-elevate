@@ -3,6 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16671084331"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-16671084331');
+    </script>
+
+    <!-- Event snippet for WA Button Click - Book Now -->
+    <script>
+    function gtag_report_conversion(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-16671084331/xXZyCKzu5cMcEKueso0-',
+          'value': 0.0,
+          'currency': 'IDR',
+          'event_callback': callback
+      });
+      return false;
+    }
+    </script>
+
+    <!-- Event snippet for Airbnb Button Click -->
+    <script>
+    function gtag_report_conversion_airbnb(url) {
+      var callback = function () {
+        if (typeof(url) != 'undefined') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'conversion', {
+          'send_to': 'AW-16671084331/6cweCK_u5cMcEKueso0-',
+          'value': 0.0,
+          'currency': 'IDR',
+          'event_callback': callback
+      });
+      return false;
+    }
+    </script>
+
     <!-- TODO: Set the document title to the name of your application -->
     <title>Villaito Dago — Luxury Private Villa in Bandung</title>
     <meta name="description" content="Experience luxury at Villaito Dago, a premium private villa with pool in Dago Pakar, Bandung. 7 bedrooms, stunning views, world-class amenities.">
