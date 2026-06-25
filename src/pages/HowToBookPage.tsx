@@ -83,6 +83,7 @@ const HowToBookPage = () => {
             href={whatsappLink}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={(e) => { e.preventDefault(); (window as any).gtag_report_conversion?.((e.currentTarget as HTMLAnchorElement).href); }}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
